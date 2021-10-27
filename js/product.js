@@ -111,9 +111,4 @@ buttonElement.addEventListener('click', function() {
     else {
         alert("0 produits séléctionnés");
     }
-}); 
-
-
-/*for( let i = 0; i < localStorage.length; i++){
-    localStorage.key(i);
-} */
+});

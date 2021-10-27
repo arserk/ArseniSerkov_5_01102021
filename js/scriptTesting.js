@@ -154,3 +154,13 @@ buttonElement.addEventListener('click', function() {
 });
 let i = localStorage.length;
 console.log(i);
+
+
+//calculates  product's total quantity
+function totalQuantity(inCart) {
+    let totalQuantity = 0;
+    for (let i in inCart) {
+        totalQuantity += inCart[i].quantity;
+    }
+    return totalQuantity;
+}
