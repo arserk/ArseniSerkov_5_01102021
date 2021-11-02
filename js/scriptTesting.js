@@ -164,3 +164,46 @@ function totalQuantity(inCart) {
     }
     return totalQuantity;
 }
+
+////////////////////
+//gets product info form API, with the cart data in localStorage, passes it to "insertProductInCartPage"
+function fetchAndDisplayProduct(inCart) {
+    fetch("http://localhost:3000/api/products/" + inCart.id)
+    .then(function(response) {
+        if (response.ok) {
+            return response.json();
+        }
+    })
+    .then(function(product) {
+        insertProductInCartPage(product, inCart.quantity, inCart.color);
+        priceCount += (product.price * inCart.quantity);
+        displayTotalPrice(priceCount);
+    })
+    .catch(function(err) {
+        console.error("Une erreur est survenue! =>", err);
+    });
+}
+
+//gets product info from API, for the price of a single product, and calculates the totalPrice
+function fetchAndDisplayPrice(inCart, arrLength) {
+    fetch("http://localhost:3000/api/products/" + inCart.id)
+    .then(function(response) {
+        if (response.ok) {
+            return response.json();
+        }
+    })
+    .then(function(product) {
+        newPriceCount += (product.price * inCart.quantity);
+        console.log("newPriceCount", newPriceCount);
+        displayTotalPrice(newPriceCount);
+        globalCounter++;
+        console.log("globalCounter =", globalCounter, "Length = ", arrLength);
+        if (globalCounter == arrLength) {
+            globalCounter = 0;
+            newPriceCount = 0;
+        }
+    })
+    .catch(function(err) {
+        console.error("Une erreur est survenue! =>", err);
+    });
+}
